@@ -3,8 +3,8 @@ import signUpUser from './4-user-promise';
 
 export default async function handelProfileSignup(firstName, lastName, fileName) {
   const result = await Promise.allSettled([
-    uploadPhoto(fileName),
     signUpUser(firstName, lastName),
+    uploadPhoto(fileName),
   ]);
 
   return result.map((obj) => ({
