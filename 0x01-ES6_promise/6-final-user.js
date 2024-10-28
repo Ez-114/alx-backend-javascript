@@ -9,6 +9,6 @@ export default async function handelProfileSignup(firstName, lastName, fileName)
 
   return result.map((obj) => ({
     status: obj.status,
-    value: obj.value === 'fulfilled' ? obj.value : String(obj.reason),
+    value: obj.status === 'fulfilled' ? obj.value : String(obj.reason),
   }));
 }
