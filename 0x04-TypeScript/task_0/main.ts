@@ -24,23 +24,24 @@ const stdsList: Array<Student> = [
   std2
 ];
 
-const tableBody = document.querySelector("table");
+export const renderTable = (stdsList: Array<Student>): void =>  {
+  // create table tag
+  const table = document.createElement('table');
+  const headRow = document.createElement('tr');
+  table.insertAdjacentElement('beforeend', headRow);
 
-stdsList.forEach((student) => {
-  const row = document.createElement("tr");
+  // insert headers
+  headRow.insertAdjacentHTML('beforeend', '<th>FirstName</th>');
+  headRow.insertAdjacentHTML('beforeend', '<th>Location</th>');
 
-  // Create a cell for the first name
-  const firstNameCell = document.createElement("td");
-  firstNameCell.textContent = student.firstName;
+  for (const student of stdsList) {
+    const studentRow = document.createElement('tr')
+    studentRow.insertAdjacentHTML('beforeend', `<td>${student.firstName}</td>`);
+    studentRow.insertAdjacentHTML('beforeend', `<td>${student.location}</td>`);
+    table.insertAdjacentElement('beforeend', studentRow);
+  }
 
-  // Create a cell for the location
-  const locationCell = document.createElement("td");
-  locationCell.textContent = student.location;
+  document.body.insertAdjacentElement('beforeend', table);
+}
 
-  // Append cells to the row
-  row.appendChild(firstNameCell);
-  row.appendChild(locationCell);
-
-  // Append the row to the table body
-  tableBody.appendChild(row);
-});
+renderTable(stdsList);
