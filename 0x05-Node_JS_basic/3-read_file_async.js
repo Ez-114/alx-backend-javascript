@@ -13,7 +13,7 @@ const countStudents = (dataPath) => new Promise((resolve, reject) => {
       const dbFieldNames = fileLines[0].split(',');
       const studentPropNames = dbFieldNames.slice(0, dbFieldNames.length - 1);
 
-      const validLines = fileLines.slice(1).filter(line => line.trim());
+      const validLines = fileLines.slice(1).filter((line) => line.trim());
 
       for (const line of validLines) {
         const studentRecord = line.split(',');
@@ -24,13 +24,14 @@ const countStudents = (dataPath) => new Promise((resolve, reject) => {
           studentGroups[field] = [];
         }
 
-        const studentEntries = studentPropNames.map((propName, idx) => [propName, studentPropValues[idx]]);
+        const studentEntries = studentPropNames
+          .map((propName, idx) => [propName, studentPropValues[idx]]);
         studentGroups[field].push(Object.fromEntries(studentEntries));
       }
 
       const totalStudents = Object
         .values(studentGroups)
-        .reduce((pre, cur) => (pre || []).length + cur.length, 0);
+        .reduce((pre, cur) => (pre || []).length + cur.length);
 
       console.log(`Number of students: ${totalStudents}`);
 
