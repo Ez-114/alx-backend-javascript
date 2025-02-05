@@ -100,3 +100,5 @@ app.on('request', (request, response) => {
 app.listen(PORT, HOST, () => {
   process.stdout.write(`Server Started -> http://${HOST}:${PORT}/\n`);
 });
+
+module.exports = app;
