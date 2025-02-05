@@ -12,7 +12,7 @@ app.on('request', (request, response) => {
   // Log the requested url
   process.stdout.write(`New Request: ${request.url}\n`);
 
-  const responseText = 'Hello ALX!';
+  const responseText = 'Hello Holberton School!';
 
   // Set response headers and status code
   response.setHeader('Content-Type', 'text/plain');
