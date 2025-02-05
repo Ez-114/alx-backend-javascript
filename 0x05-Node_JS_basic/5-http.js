@@ -62,7 +62,7 @@ app.on('request', (request, response) => {
   const parsedUrl = url.parse(request.url, true);
   const urlPath = parsedUrl.pathname;
 
-  // Handel routes
+  // Handle routes
   if (urlPath === '/' && request.method === 'GET') {
     // Set the response message
     const responseText = 'Hello Holberton School!';
@@ -71,9 +71,10 @@ app.on('request', (request, response) => {
     response.setHeader('Content-Type', 'text/plain');
     response.setHeader('Content-Length', responseText.length);
 
-    // Set reqponse status
+    // Set response status
     response.statusCode = 200;
     response.write(Buffer.from(responseText));
+    response.end(); // End the response
   } else if (urlPath === '/students' && request.method === 'GET') {
     const responsePart = ['This is the list of our students'];
 
@@ -85,6 +86,7 @@ app.on('request', (request, response) => {
         response.setHeader('Content-Length', responseText.length);
         response.statusCode = 200;
         response.write(Buffer.from(responseText));
+        response.end(); // End the response
       })
       .catch((err) => {
         responsePart.push(err instanceof Error ? err.message : err.toString());
@@ -93,7 +95,13 @@ app.on('request', (request, response) => {
         response.setHeader('Content-Length', responseText.length);
         response.statusCode = 200;
         response.write(Buffer.from(responseText));
+        response.end(); // End the response
       });
+  } else {
+    // Handle unknown routes
+    response.statusCode = 404;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('404 Not Found');
   }
 });
 
@@ -101,4 +109,5 @@ app.listen(PORT, HOST, () => {
   process.stdout.write(`Server Started -> http://${HOST}:${PORT}/\n`);
 });
 
+// Export the server instance for testing
 module.exports = app;
